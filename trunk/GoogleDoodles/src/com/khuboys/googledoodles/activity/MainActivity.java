@@ -1,4 +1,6 @@
-package com.khuboys.activity.googledoodles;
+package com.khuboys.googledoodles.activity;
+
+import com.khuboys.activity.googledoodles.R;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
