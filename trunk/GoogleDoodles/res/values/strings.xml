@@ -3,6 +3,7 @@
 
     <string name="app_name">Google Doodles</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_doodle">Title</string>
     <string name="action_settings">Settings</string>
     <string name="pref_content">Contents</string>
     <string name="pref_display_text_summary">Display Text</string>
