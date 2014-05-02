@@ -12,7 +12,11 @@ import android.widget.TextView;
 
 import com.khuboys.activity.googledoodles.R;
 import com.khuboys.googledoodles.model.GoogleDoodle;
-
+/**
+ * 
+ * @author QUOC NGUYEN
+ *
+ */
 public class GoogleDoodleItemView extends LinearLayout {
 	private ImageView imgDoodle;
 	private TextView txtTitle;
@@ -58,7 +62,6 @@ public class GoogleDoodleItemView extends LinearLayout {
 				Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
 				imgDoodle.setImageBitmap(bitmap);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
