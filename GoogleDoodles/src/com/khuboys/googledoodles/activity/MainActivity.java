@@ -24,14 +24,12 @@ import com.khuboys.googledoodles.model.GoogleDoodle;
 import com.khuboys.googledoodles.utils.GetJSONAsyncTask;
 
 public class MainActivity extends ActionBarActivity implements OnTaskCompleted {
-	private ImageView imgDoodle;
-	private TextView txtTitle;
-	private TextView txtDate;
+
 	private ArrayList<GoogleDoodle> doodleList = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.main_activity);
 		
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
@@ -48,24 +46,24 @@ public class MainActivity extends ActionBarActivity implements OnTaskCompleted {
 	/**
 	 * 
 	 */
-	public void updateUI(ArrayList<GoogleDoodle> doodleList){
-		// update UI
-		try {
-			String imageLink = doodleList.get(0).image_url;
-			String title = doodleList.get(0).title;
-			imgDoodle = (ImageView)findViewById(R.id.imgDoodle);
-			txtTitle = (TextView)findViewById(R.id.txtTitleDoodle);
-			//txtDate = (TextView)findViewById(R.id.txtDateDoodle);
-			URL url = new URL(imageLink);
-			Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-			imgDoodle.setImageBitmap(bitmap);
-			
-			txtTitle.setText(title);
-			// txtDate.setText(doodleList.get(0).);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
+//	public void updateUI(ArrayList<GoogleDoodle> doodleList){
+//		// update UI
+//		try {
+//			String imageLink = doodleList.get(0).image_url;
+//			String title = doodleList.get(0).title;
+//			imgDoodle = (ImageView)findViewById(R.id.imgDoodle);
+//			txtTitle = (TextView)findViewById(R.id.txtTitleDoodle);
+//			//txtDate = (TextView)findViewById(R.id.txtDateDoodle);
+//			URL url = new URL(imageLink);
+//			Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+//			imgDoodle.setImageBitmap(bitmap);
+//			
+//			txtTitle.setText(title);
+//			// txtDate.setText(doodleList.get(0).);
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		}
+//	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -102,7 +100,7 @@ public class MainActivity extends ActionBarActivity implements OnTaskCompleted {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
+			View rootView = inflater.inflate(R.layout.main_fragment, container,
 					false);
 			return rootView;
 		}
@@ -117,7 +115,7 @@ public class MainActivity extends ActionBarActivity implements OnTaskCompleted {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				updateUI(doodleList);
+//				updateUI(doodleList);
 			}
 		});
 	}
