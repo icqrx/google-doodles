@@ -1,4 +1,4 @@
-package com.khuboys.googledoodles.utils;
+package com.khuboys.googledoodles.asynctask;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,9 @@ import android.os.AsyncTask;
 
 import com.khuboys.googledoodles.interfaces.OnTaskCompleted;
 import com.khuboys.googledoodles.model.GoogleDoodle;
+import com.khuboys.googledoodles.utils.Defs;
+import com.khuboys.googledoodles.utils.GoogleDoodlesJsonParser;
+import com.khuboys.googledoodles.utils.HttpRequest;
 
 /**
  * 

@@ -1,31 +1,28 @@
 package com.khuboys.googledoodles.activity;
 
-import java.net.URL;
 import java.util.ArrayList;
 
+import android.app.ListActivity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.BaseAdapter;
 
+import com.costum.android.widget.PullAndLoadListView;
+import com.costum.android.widget.PullAndLoadListView.OnLoadMoreListener;
 import com.khuboys.activity.googledoodles.R;
+import com.khuboys.googledoodles.adapter.GoogleDoodleApdater;
+import com.khuboys.googledoodles.asynctask.GetJSONAsyncTask;
 import com.khuboys.googledoodles.interfaces.OnTaskCompleted;
 import com.khuboys.googledoodles.model.GoogleDoodle;
-import com.khuboys.googledoodles.utils.GetJSONAsyncTask;
 
-public class MainActivity extends ActionBarActivity implements OnTaskCompleted {
+public class MainActivity extends ListActivity implements OnTaskCompleted {
 
 	private ArrayList<GoogleDoodle> doodleList = null;
+	private GoogleDoodleApdater googleDoodleAdapter = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,37 +30,11 @@ public class MainActivity extends ActionBarActivity implements OnTaskCompleted {
 		
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
-		
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
-		
+
 		// run asynctask
 		new GetJSONAsyncTask(MainActivity.this, this).execute();
-		
 	}
-	/**
-	 * 
-	 */
-//	public void updateUI(ArrayList<GoogleDoodle> doodleList){
-//		// update UI
-//		try {
-//			String imageLink = doodleList.get(0).image_url;
-//			String title = doodleList.get(0).title;
-//			imgDoodle = (ImageView)findViewById(R.id.imgDoodle);
-//			txtTitle = (TextView)findViewById(R.id.txtTitleDoodle);
-//			//txtDate = (TextView)findViewById(R.id.txtDateDoodle);
-//			URL url = new URL(imageLink);
-//			Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-//			imgDoodle.setImageBitmap(bitmap);
-//			
-//			txtTitle.setText(title);
-//			// txtDate.setText(doodleList.get(0).);
-//		} catch (Exception ex) {
-//			ex.printStackTrace();
-//		}
-//	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -90,22 +61,6 @@ public class MainActivity extends ActionBarActivity implements OnTaskCompleted {
 	}
 
 	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.main_fragment, container,
-					false);
-			return rootView;
-		}
-	}
-	/**
 	 * note : TODO QUOC
 	 */
 	@Override
@@ -115,9 +70,67 @@ public class MainActivity extends ActionBarActivity implements OnTaskCompleted {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-//				updateUI(doodleList);
+				updateUI(doodleList);
+			}
+		});
+	}
+	
+	protected void updateUI(ArrayList<GoogleDoodle> doodleList) {
+		googleDoodleAdapter = new GoogleDoodleApdater(MainActivity.this, doodleList);
+		setListAdapter(googleDoodleAdapter);
+		
+		((PullAndLoadListView) getListView()).setOnLoadMoreListener(new OnLoadMoreListener() {
+			
+			@Override
+			public void onLoadMore() {
+				new LoadMoreDataTask().execute();
 			}
 		});
 	}
 
+	/**
+	 * Inner class for load more data task
+	 * @author QUOC NGUYEN
+	 *
+	 */
+	private class LoadMoreDataTask extends AsyncTask<Void, Void, Void> {
+
+		@Override
+		protected Void doInBackground(Void... params) {
+
+			if (isCancelled()) {
+				return null;
+			}
+
+			// Simulates a background task
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			}
+
+			for (int i = 0; i < doodleList.size(); i++)
+				doodleList.add(doodleList.get(i));
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			//mListItems.add("Added after load more");
+
+			// We need notify the adapter that the data have been changed
+			((BaseAdapter) getListAdapter()).notifyDataSetChanged();
+
+			// Call onLoadMoreComplete when the LoadMore task, has finished
+			((PullAndLoadListView) getListView()).onLoadMoreComplete();
+
+			super.onPostExecute(result);
+		}
+
+		@Override
+		protected void onCancelled() {
+			// Notify the loading more operation has finished
+			((PullAndLoadListView) getListView()).onLoadMoreComplete();
+		}
+	}
 }
