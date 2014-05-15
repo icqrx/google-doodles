@@ -33,6 +33,8 @@ public class MainActivity extends ListActivity implements OnTaskCompleted {
 
 		// run asynctask
 		new GetJSONAsyncTask(MainActivity.this, this).execute();
+		
+		
 	}
 	
 	@Override
@@ -75,17 +77,21 @@ public class MainActivity extends ListActivity implements OnTaskCompleted {
 		});
 	}
 	
+	/**
+	 * 
+	 * @param doodleList
+	 */
 	protected void updateUI(ArrayList<GoogleDoodle> doodleList) {
 		googleDoodleAdapter = new GoogleDoodleApdater(MainActivity.this, doodleList);
 		setListAdapter(googleDoodleAdapter);
 		
-		((PullAndLoadListView) getListView()).setOnLoadMoreListener(new OnLoadMoreListener() {
-			
-			@Override
-			public void onLoadMore() {
-				new LoadMoreDataTask().execute();
-			}
-		});
+//		((PullAndLoadListView) getListView()).setOnLoadMoreListener(new OnLoadMoreListener() {
+//			
+//			@Override
+//			public void onLoadMore() {
+//				new LoadMoreDataTask().execute();
+//			}
+//		});
 	}
 
 	/**
@@ -102,14 +108,8 @@ public class MainActivity extends ListActivity implements OnTaskCompleted {
 				return null;
 			}
 
-			// Simulates a background task
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-			}
-
-			for (int i = 0; i < doodleList.size(); i++)
-				doodleList.add(doodleList.get(i));
+//			for (int i = 0; i < doodleList.size(); i++)
+//				doodleList.add(doodleList.get(i));
 
 			return null;
 		}
