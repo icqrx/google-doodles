@@ -59,8 +59,8 @@ public class GoogleDoodleItemView extends LinearLayout {
 			try {
 				URL url;
 				url = new URL(imageLink);
-				Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-				imgDoodle.setImageBitmap(bitmap);
+//				Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+//				imgDoodle.setImageBitmap(bitmap);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
