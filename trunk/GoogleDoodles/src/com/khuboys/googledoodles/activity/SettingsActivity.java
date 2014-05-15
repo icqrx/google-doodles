@@ -1,9 +1,9 @@
 package com.khuboys.googledoodles.activity;
 
+import com.khuboys.activity.googledoodles.R;
+
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-
-import com.khuboys.activity.googledoodles.R;
 
 /**
  * This class app setting, e.x : image, text contents ....  

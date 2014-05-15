@@ -4,15 +4,11 @@ import java.util.ArrayList;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.BaseAdapter;
 
-import com.costum.android.widget.PullAndLoadListView;
-import com.costum.android.widget.PullAndLoadListView.OnLoadMoreListener;
 import com.khuboys.activity.googledoodles.R;
 import com.khuboys.googledoodles.adapter.GoogleDoodleApdater;
 import com.khuboys.googledoodles.asynctask.GetJSONAsyncTask;
@@ -99,38 +95,38 @@ public class MainActivity extends ListActivity implements OnTaskCompleted {
 	 * @author QUOC NGUYEN
 	 *
 	 */
-	private class LoadMoreDataTask extends AsyncTask<Void, Void, Void> {
-
-		@Override
-		protected Void doInBackground(Void... params) {
-
-			if (isCancelled()) {
-				return null;
-			}
-
-//			for (int i = 0; i < doodleList.size(); i++)
-//				doodleList.add(doodleList.get(i));
-
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			//mListItems.add("Added after load more");
-
-			// We need notify the adapter that the data have been changed
-			((BaseAdapter) getListAdapter()).notifyDataSetChanged();
-
-			// Call onLoadMoreComplete when the LoadMore task, has finished
-			((PullAndLoadListView) getListView()).onLoadMoreComplete();
-
-			super.onPostExecute(result);
-		}
-
-		@Override
-		protected void onCancelled() {
-			// Notify the loading more operation has finished
-			((PullAndLoadListView) getListView()).onLoadMoreComplete();
-		}
-	}
+//	private class LoadMoreDataTask extends AsyncTask<Void, Void, Void> {
+//
+//		@Override
+//		protected Void doInBackground(Void... params) {
+//
+//			if (isCancelled()) {
+//				return null;
+//			}
+//
+////			for (int i = 0; i < doodleList.size(); i++)
+////				doodleList.add(doodleList.get(i));
+//
+//			return null;
+//		}
+//
+//		@Override
+//		protected void onPostExecute(Void result) {
+//			//mListItems.add("Added after load more");
+//
+//			// We need notify the adapter that the data have been changed
+//			((BaseAdapter) getListAdapter()).notifyDataSetChanged();
+//
+//			// Call onLoadMoreComplete when the LoadMore task, has finished
+//			((PullAndLoadListView) getListView()).onLoadMoreComplete();
+//
+//			super.onPostExecute(result);
+//		}
+//
+//		@Override
+//		protected void onCancelled() {
+//			// Notify the loading more operation has finished
+//			((PullAndLoadListView) getListView()).onLoadMoreComplete();
+//		}
+//	}
 }
