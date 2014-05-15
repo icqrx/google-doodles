@@ -95,7 +95,9 @@ public class GoogleDoodleApdater extends BaseAdapter{
 		if(mDoodleList == null) {
 			return googleDoodleItemView;
 		}
+		
 		GoogleDoodle itemInfo = mDoodleList.get(position);
+		
 		googleDoodleItemView.setData(itemInfo, position);
 		return googleDoodleItemView;
 	}

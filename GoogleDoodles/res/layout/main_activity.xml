@@ -16,9 +16,11 @@
         android:layout_height="wrap_content"
         android:text="TextView" />
 
-    <com.costum.android.widget.PullAndLoadListView
+    <!--  <com.costum.android.widget.PullAndLoadListView
         android:id="@+id/android:list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent" />-->
+	<ListView  android:id="@+id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" ></ListView>
 </LinearLayout>
