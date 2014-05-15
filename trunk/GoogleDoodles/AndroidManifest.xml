@@ -7,8 +7,9 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="19" />
-    
-	<!-- Internet permission -->
+
+    <!-- Internet permission -->
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
@@ -16,6 +17,16 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <receiver android:name="com.khuboys.googledoodles.activity.MyWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+
         <activity
             android:name="com.khuboys.googledoodles.activity.MainActivity"
             android:label="@string/app_name" >
@@ -25,7 +36,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.khuboys.googledoodles.activity.SettingsActivity"></activity>
+        <activity android:name="com.khuboys.googledoodles.activity.SettingsActivity" >
+        </activity>
+        <service android:name="com.khuboys.googledoodles.activity.UpdateWidgetService"></service> 
     </application>
 
 </manifest>

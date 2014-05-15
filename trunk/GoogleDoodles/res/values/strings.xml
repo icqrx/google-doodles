@@ -8,5 +8,6 @@
     <string name="pref_content">Contents</string>
     <string name="pref_display_text_summary">Display Text</string>
     <string name="pref_display_link">Display Link</string>
+    <string name="setting"></string>
 
 </resources>
